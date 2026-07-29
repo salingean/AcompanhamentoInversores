@@ -15,7 +15,7 @@ A arquitetura do projeto é dividida em duas partes principais:
 2. **Frontend (Interface):** Uma aplicação web super leve e rápida, empacotada usando o **Vite**. Utilizamos a biblioteca **ApexCharts** para desenhar gráficos modernos, responsivos e sem os gargalos de performance que o Power BI apresentava.
 
 ## ✨ Funcionalidades em Destaque
-- 📈 **Gráficos Interativos e Fluidos:** Zoom in/out, pan e visualização de dados detalhados ao passar o mouse, sem travamentos.
+- 📈 **Gráficos Interativos e Fluidos:** Zoom in/out, pan e tooltips customizadas modernas para visualização de dados detalhados ao passar o mouse, sem travamentos.
 - 🔍 **Ampliação (Modo Tela Cheia):** Possibilidade de expandir gráficos individuais para análise profunda dos dados de geração e irradiação.
 - 🎨 **Personalização de Cores:** Os usuários podem alterar a cor das linhas dos gráficos conforme preferência visual.
 - 🌓 **Modo Escuro (Dark Mode):** Alternância instantânea entre tema claro e escuro, garantindo conforto visual.
