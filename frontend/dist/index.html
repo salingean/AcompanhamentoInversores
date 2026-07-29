@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoramento de Inversores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="./assets/index-CZ86ebPF.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BGiulsqs.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="logo">
+            <h1><span class="highlight">Solar</span>Monitor</h1>
+        </div>
+        <div class="filters-container" style="display: flex; gap: 10px; align-items: center;">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Pesquisar inversor..." autocomplete="off">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+        </div>
+        <div class="user-info" style="display: flex; align-items: center; gap: 15px;">
+            <button id="themeToggleBtn" class="action-btn" title="Alternar Tema" style="padding: 2px; background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                <svg id="themeIconSun" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <svg id="themeIconMoon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
+            <span><span class="status-indicator"></span> Ao Vivo</span>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <div id="loading" class="loading-state">
+            <div class="spinner"></div>
+            <p>Carregando dados dos inversores...</p>
+        </div>
+        <div id="chartsContainer" class="charts-grid">
+            <!-- Gráficos serão renderizados aqui dinamicamente -->
+        </div>
+    </main>
+
+    <!-- Modal para gráfico expandido -->
+    <div id="expandModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Detalhes do Inversor</h2>
+                <div class="modal-actions">
+                    <button id="colorSettingsBtn" class="action-btn" style="background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); display: flex; align-items: center; gap: 5px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        Cores
+                    </button>
+                    <button id="deselectAllBtn" class="action-btn">Desmarcar Todos</button>
+                </div>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="modal-chart-container">
+                <div id="modalChart"></div>
+                <div id="modalScrollContainer" class="chart-scrollbar-container">
+                    <div id="modalScrollContent" class="chart-scrollbar-content"></div>
+                </div>
+            </div>
+    </div>
+
+    <!-- Modal para Configuração de Cores -->
+    <div id="colorSettingsModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Personalizar Cores dos Parâmetros</h2>
+                <span class="close-color-btn close-btn">&times;</span>
+            </div>
+            <div id="colorListContainer" style="display: flex; flex-direction: column; gap: 10px; max-height: 60vh; overflow-y: auto; padding: 10px 0;">
+                <!-- Itens injetados via JS -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
